@@ -1,4 +1,4 @@
-//import tmdbAPI from '../helpers/tmdbAPI';
+import tmdbAPI from '../helpers/tmdbAPI';
 export const MOVIES = 'MOVIES'
 export const ADD_FAV = 'ADD_FAV'
 export const REMOVE_FAV = 'REMOVE_FAV'
@@ -24,33 +24,28 @@ export function removeFromFavorites(item) {
   }
 }
 
-//FUNCTION SEDING ACTION TO SAGA
-export function trendingMovies() {
-  return {
-    type: 'TRENDING_MOVIES',
-  }
-}
-
-export function searchMovies(name) {
-  return {
-    type: 'SEARCH_BY_NAME',
-    name
-  }
-}
-
 //FUNCTIONS USED WITH REDUX THUNK
-/* export function asyncAddMovies(items) {
+export function asyncAddMovies(items) {
   return {
     type: MOVIES,
     items
   }
 }
 
-export const getMovies = () => async dispatch => {
+export const getTrendingMovies = () => async dispatch => {
   try {
     const movies = await tmdbAPI.fetchTrendingMovies()
     dispatch(asyncAddMovies(movies))
   } catch (error) {
     console.error(error)
   }
-} */
+}
+
+export const getMoviesByName = (name) => async dispatch => {
+  try {
+    const movies = await tmdbAPI.fetchMovieByName(name)
+    dispatch(asyncAddMovies(movies))
+  } catch (error) {
+    console.error(error)
+  }
+}

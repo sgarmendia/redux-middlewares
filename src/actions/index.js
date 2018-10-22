@@ -37,20 +37,3 @@ export function searchMovies(name) {
     name
   }
 }
-
-//FUNCTIONS USED WITH REDUX THUNK
-/* export function asyncAddMovies(items) {
-  return {
-    type: MOVIES,
-    items
-  }
-}
-
-export const getMovies = () => async dispatch => {
-  try {
-    const movies = await tmdbAPI.fetchTrendingMovies()
-    dispatch(asyncAddMovies(movies))
-  } catch (error) {
-    console.error(error)
-  }
-} */

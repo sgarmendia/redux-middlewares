@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import MovieResults from './components/MovieResults';
+import Favorites from './components/Favorites';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 
 class App extends Component {
   render() {
@@ -12,9 +15,12 @@ class App extends Component {
             <p>Simple application to test several technologies in react</p>
           </div>
         </div>
-        <div className="row">
-          <MovieResults />
-        </div>
+        <Router>
+          <Switch>
+            <Route exact strict path='/' component={MovieResults} />
+            <Route exact strict path='/favorites' component={Favorites} />
+          </Switch> 
+        </Router>
       </div>
     );
   }

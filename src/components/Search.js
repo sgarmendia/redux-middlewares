@@ -1,50 +1,40 @@
 import React, { Component } from 'react';
-import tmdbAPI from '../helpers/tmdbAPI';
-import { Form, FormControl, FormGroup, ControlLabel, Button } from 'react-bootstrap';
+import ReactDOM from 'react-dom';
+import { Form, FormControl, FormGroup, ControlLabel } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { moviesToStore } from "../actions";
-
+import * as actions from "../actions";
 
 class Search extends Component {
+  componentDidMount() {
+    ReactDOM.findDOMNode(this.movieSearch).focus()
+    this.props.dispatch(actions.trendingMovies())
+  }
+  
   state = { query: '' }
 
   search = () => {
-    this.state.query ? this.getMovieByName(this.state.query) : this.getTrendingMovies()
+    if(!this.state.query) return
+    this.props.dispatch(actions.searchMovies(this.state.query))
     this.setState({ query: '' })
   }
 
-  getMovieByName = async name => {
-    try {
-      const movies = await tmdbAPI.fetchMovieByName(name)
-      this.props.moviesToStore(movies)
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
-  getTrendingMovies = async () => {
-    try {
-      const movies = await tmdbAPI.fetchTrendingMovies()
-      this.props.moviesToStore(movies)
-    } catch (error) {
-      console.error(error)
-    }
-  }
+  handle = e => e.keyCode === 13 && this.search(e.target.value)
 
   render() {
     return (
       <React.Fragment>
-        <Form inline className='col-md-5 col-md-offset-4'>
+        <Form inline className='' 
+              onSubmit={e => e.preventDefault()}>
           <FormGroup>
             <ControlLabel></ControlLabel>
-            <FormControl 
+            <FormControl
+              ref={input => this.movieSearch = input }
               type='text'
               placeholder='search'
               value={this.state.query}
               onChange={e => this.setState({ query: e.target.value })}
-              onSubmit={this.search}
+              onKeyUp={this.handle}
             />{' '}
-            <Button onClick={this.search}>Submit</Button>
           </FormGroup>
         </Form>
       </React.Fragment>
@@ -52,4 +42,4 @@ class Search extends Component {
   }
 }
 
-export default connect(null,{ moviesToStore })(Search);
+export default connect()(Search);

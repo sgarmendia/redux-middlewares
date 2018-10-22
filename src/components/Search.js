@@ -7,14 +7,14 @@ import * as actions from "../actions";
 class Search extends Component {
   componentDidMount() {
     ReactDOM.findDOMNode(this.movieSearch).focus()
-    this.props.dispatch(actions.trendingMovies())
+    this.props.dispatch(actions.asyncGetTrendingMovies())
   }
   
   state = { query: '' }
 
   search = () => {
     if(!this.state.query) return
-    this.props.dispatch(actions.searchMovies(this.state.query))
+    this.props.dispatch(actions.asyncGetMoviesByName(this.state.query))
     this.setState({ query: '' })
   }
 

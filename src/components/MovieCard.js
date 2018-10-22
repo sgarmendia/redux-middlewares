@@ -6,7 +6,7 @@ import { addToFavorites, removeFromFavorites } from '../actions';
 
 class MovieCard extends Component {
   state = { 
-    heart: this.props.favorites.find(m => m === this.props.movie),
+    heart: this.props.favorites.find(m => m.id === this.props.movie.id),
     show: false,
   }
 

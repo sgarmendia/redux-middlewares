@@ -18,7 +18,7 @@ class Search extends Component {
     this.setState({ query: '' })
   }
 
-  handle = e => e.keyCode === 13 && this.search(e.target.value)
+  handle = e => (e.key === 'Enter' || e.keyCode === 13) && this.search(e.target.value)
 
   render() {
     return (

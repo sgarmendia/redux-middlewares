@@ -10,6 +10,12 @@ In the project directory, you can run:
  npm install
  npm start
 ```
+Before running the app, please define a varible in an enviroment file `.env` in the root directory 
+with your [TMDB](https://www.themoviedb.org/documentation/api) API KEY as follows:
+
+```
+REACT_APP_API_KEY='api_key_string'
+```
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
